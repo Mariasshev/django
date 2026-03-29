@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from datetime import datetime
+from .forms import RegistrationForm
 
 def hello(request):
     return HttpResponse("Hello World!")
@@ -26,3 +27,13 @@ def intro(request):
 def privacy(request):
     template = loader.get_template('privacy.html')
     return HttpResponse(template.render({}, request))
+
+def register(request):
+    if request.method == 'POST':
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            return HttpResponse("Дякуємо за реєстрацію!")
+    else:
+        form = RegistrationForm()
+    
+    return render(request, 'register.html', {'form': form})

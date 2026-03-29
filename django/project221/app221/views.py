@@ -22,3 +22,7 @@ def intro(request):
     }
     template = loader.get_template('intro.html')
     return HttpResponse(template.render(context,request))
+
+def privacy(request):
+    template = loader.get_template('privacy.html')
+    return HttpResponse(template.render({}, request))

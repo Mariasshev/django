@@ -32,7 +32,8 @@ def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
-            return HttpResponse("Дякуємо за реєстрацію!")
+            username = form.cleaned_data['username']
+            return render(request, 'success.html', {'username': username})
     else:
         form = RegistrationForm()
     
